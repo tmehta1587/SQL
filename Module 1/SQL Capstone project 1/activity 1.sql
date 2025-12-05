@@ -14,6 +14,7 @@ INSERT INTO Salesman(Salesman_id, name, city, Comission) VALUES
     ('5007', 'Paul Adam', 'Rome', '0.13'),
     ('5003', 'Lauson Hen', 'San Jose', '0.12');
 
+SELECT * FROM Salesman;
 
 CREATE TABLE IF NOT EXISTS Customer(
     customer_id TEXT,
@@ -33,12 +34,14 @@ INSERT INTO Customer( customer_id, cust_name, city,grade, Salesman_id) VALUES
     ('3003', 'jozy altidor', 'moscow', '200', '5007'),
     ('3001', 'brad guzan', 'london', '', '5005');
 
+SELECT * FROM Customer;
+
 CREATE TABLE IF NOT EXISTS Orders(
     ord_no TEXT PRIMARY KEY,
     purch_amt TEXT,
     ord_date TEXT,
     customer_id TEXT,
-    Salesman_id TEXT,
+    Salesman_id TEXT
 );
 
 INSERT INTO Orders(ord_no, purch_amt, ord_date, customer_id, Salesman_id) VALUES
@@ -49,9 +52,11 @@ INSERT INTO Orders(ord_no, purch_amt, ord_date, customer_id, Salesman_id) VALUES
     ('70007', '948.5', '2012-09-10', '3005', '5005'),
     ('70005', '2400.6',  '2012-07-27', '3007', '5006');
 
-SELECT customer.cust_name, salesman.name, salesman.city
+SELECT * FROM Orders;
+
+SELECT * 
 FROM Customer 
-Join Salesman ON Customer.city = Salesman.city;
+Join Salesman WHERE Customer.city = Salesman.city;
 
 SELECT Customer.cust_name, Salesman.name
 FROM Customer
@@ -73,10 +78,10 @@ SELECT Orders.ord_no, Customer.cust_name, Salesman.comission AS 'Comission%',
 Orders.purch_amt & Salesman.comission AS 'Comission'
 FROM Orders
 JOIN Salesman ON Orders.Salesman_id = Salesman.Salesman_id
-JOIN Customer ON Orders.customer.id = Customer.customer_id
+JOIN Customer ON Orders.customer_id = Customer.customer_id
 WHERE Customer.grade >= 200;
 
-SELECT 
+SELECT * 
 FROM Customer
 JOIN Orders ON Customer.customer_id = Orders.customer_id
 WHERE Orders.ord_date = '2012-10-05';
